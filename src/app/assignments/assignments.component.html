@@ -1,0 +1,17 @@
+
+<p>Titre = {{titre}} (files)</p>
+
+<p>avec l'angular version 17</p>
+
+<ul>
+    <li *ngFor="let a of assignments">
+        {{a.nom}}, date de rendu: {{a.daterendu}}, rendu: {{a.rendu}}
+    </li>
+</ul>
+
+<p>aver angular superieur a 17</p>
+<ul>
+   @for (assignment of assignments; track assignment.nom ) {
+    le devoir {{assignment.nom}} est a rendre le {{assignment.daterendu}}. Soumis par l'étudiant : {{assignment.rendu}}
+   }
+</ul>
