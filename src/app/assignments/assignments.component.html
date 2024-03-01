@@ -1,17 +1,50 @@
+<h1>Ajout d'un assignment</h1>
 
-<p>Titre = {{titre}} (files)</p>
+<form ngForm #assignmentForm 
+    (submit)="onSubmit ($event); assignmentForm.reset()" 
+    class="form"
+>
+    <mat-form-field>
+        <input matInput placeholder="Nom" required [(ngModel)]="nomAssignment" name="nom">
+    </mat-form-field>
 
+    <mat-form-field>
+        <mat-label>Date de rendu</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      
+    <button 
+        mat-stroked-button 
+        color="primary" [disabled]="nomAssignment=='' || dateDeRendu===undefined">Ajouter devoir
+    </button>
+</form>
+
+<h1>{{titre}}</h1>
 <p>avec l'angular version 17</p>
 
-<ul>
-    <li *ngFor="let a of assignments">
-        {{a.nom}}, date de rendu: {{a.daterendu}}, rendu: {{a.rendu}}
-    </li>
-</ul>
+<mat-list>
+    <mat-list-item>
+        <p *ngFor="let a of assignments">
+            {{a.nom}}, rendu rendu le : {{a.dateRendu | date}}, rendu: {{a.rendu}}</p>
+    </mat-list-item>
+    </mat-list>
 
 <p>aver angular superieur a 17</p>
-<ul>
+<table>
+    <tbody>
    @for (assignment of assignments; track assignment.nom ) {
-    le devoir {{assignment.nom}} est a rendre le {{assignment.daterendu}}. Soumis par l'étudiant : {{assignment.rendu}}
-   }
-</ul>
+    @if(assignment.rendu){
+        <tr>
+            <td>{{assignment.nom}}</td>  
+            <td>{{assignment.dateRendu | date:'dd/MM/YYYY'}}</td>  
+            <td>{{assignment.rendu}}</td>
+        </tr>
+    }
+    }
+    </tbody>
+</table>
+
+<app-assignment-detail></app-assignment-detail>
