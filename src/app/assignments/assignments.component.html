@@ -1,50 +1,33 @@
-<h1>Ajout d'un assignment</h1>
-
-<form ngForm #assignmentForm 
-    (submit)="onSubmit ($event); assignmentForm.reset()" 
-    class="form"
->
-    <mat-form-field>
-        <input matInput placeholder="Nom" required [(ngModel)]="nomAssignment" name="nom">
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Date de rendu</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      
-    <button 
-        mat-stroked-button 
-        color="primary" [disabled]="nomAssignment=='' || dateDeRendu===undefined">Ajouter devoir
-    </button>
-</form>
-
-<h1>{{titre}}</h1>
-<p>avec l'angular version 17</p>
-
-<mat-list>
-    <mat-list-item>
-        <p *ngFor="let a of assignments">
-            {{a.nom}}, rendu rendu le : {{a.dateRendu | date}}, rendu: {{a.rendu}}</p>
-    </mat-list-item>
+@if (formeVisible) {
+<app-add-assignment (nouvelAssignment)="ajoutAssignment($event)"></app-add-assignment>
+}@else{
+<div class="container">
+    <button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()">Ajouter
+        Assignment</button>
+    <h1>{{titre}}</h1>
+    <mat-divider></mat-divider>
+    <mat-list>
+        @for(assignment of assignments; track assignment.nom) {
+        <mat-list-item (click)="assignmentClicke(assignment)">
+            <div [ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}">
+                <h3 matLine>{{assignment.nom}}</h3>
+                <p matLine>rendu: {{assignment.rendu}}</p>
+                <p matListItemTitle>{{assignment.dateRendu | date:'dd/MM/YYYY'}}</p>
+                <p matListItemLine>{{assignment.nom}} rendu: {{ assignment.rendu}}</p>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        }
     </mat-list>
-
-<p>aver angular superieur a 17</p>
-<table>
-    <tbody>
-   @for (assignment of assignments; track assignment.nom ) {
-    @if(assignment.rendu){
-        <tr>
-            <td>{{assignment.nom}}</td>  
-            <td>{{assignment.dateRendu | date:'dd/MM/YYYY'}}</td>  
-            <td>{{assignment.rendu}}</td>
-        </tr>
+    <!--
+    <@if (assignmentSelectionne) {
+        <h3>Assignment Cliqué :{{assignmentSelectionne.nom}}</h3>
     }
-    }
-    </tbody>
-</table>
+    -->
 
-<app-assignment-detail></app-assignment-detail>
+    <app-assignment-detail 
+        [assignmentTransmis]="assignmentSelectionne"
+        (deleteAssignment)="onDeleteAssignment()">
+    </app-assignment-detail>
+</div>
+}
