@@ -38,6 +38,8 @@ export class AssignmentsService {
       return of("Assignment modifié");
   }
   deleteAssignment(assignment:Assignment):Observable<string> {
+      let pos = this.assignments.indexOf(assignment);
+      this.assignments.splice(pos, 1);
       return of("Assignment supprimé");
   }
 }
