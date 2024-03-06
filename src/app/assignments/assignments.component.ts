@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { AddAssignmentComponent } from './add-assignment/add-assignment.component';
 import { AssignmentsService } from '../shared/assignments.service';
 import { of } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
@@ -23,48 +24,12 @@ import { of } from 'rxjs';
     MatListModule,
     AddAssignmentComponent,
     MatButtonModule,
+    RouterLink
   ],
 })
 export class AssignmentsComponent implements OnInit {
   titre = 'Liste des assignments';
   ajoutActive = false;
-  formeVisible = false;
-
-  // memorisation de l'assignement cliqué
-  assignmentSelectionne: Assignment | undefined;
-
-  assignmentClicke(a: Assignment) {
-    console.log('assignment clique : ' + a.nom);
-
-    this.assignmentSelectionne = a;
-  }
-
-  onAddAssignmentBtnClick() {
-    this.formeVisible = true;
-  }
-
-  ajoutAssignment(event: Assignment) {
-    //this.assignments.push(event);
-    this.assignmentsService.addAssignment(event).subscribe((reponse) => {
-      console.log(reponse);
-      //on ne cache le formulaire que si l'ajout est ok
-      // si non on rique de ne pas voir l'assignement ajouté
-      this.formeVisible = false;
-    });
-  
-  }
-
-  onDeleteAssignment() {
-    if (this.assignmentSelectionne) {
-      this.assignmentsService.deleteAssignment(this.assignmentSelectionne)
-      .subscribe((reponse) => {
-          console.log(reponse);
-          this.assignmentSelectionne = undefined;
-        }
-      )
-    }
-  }
-
   assignments: Assignment[] = [];
 
   //ice on injecte le service

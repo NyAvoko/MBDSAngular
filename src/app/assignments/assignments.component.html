@@ -1,20 +1,25 @@
-@if (formeVisible) {
-<app-add-assignment (nouvelAssignment)="ajoutAssignment($event)"></app-add-assignment>
-}@else{
 <div class="container">
-    <button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()">Ajouter
-        Assignment</button>
+    <div class="btnAjout">
+        <a routerLink="/add">
+            <button mat-flat-button color="accent">Ajouter
+                Assignment</button>
+        </a>
+    </div>
     <h1>{{titre}}</h1>
     <mat-divider></mat-divider>
     <mat-list>
         @for(assignment of assignments; track assignment.nom) {
-        <mat-list-item (click)="assignmentClicke(assignment)">
-            <div [ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}">
-                <h3 matLine>{{assignment.nom}}</h3>
-                <p matLine>rendu: {{assignment.rendu}}</p>
-                <p matListItemTitle>{{assignment.dateRendu | date:'dd/MM/YYYY'}}</p>
-                <p matListItemLine>{{assignment.nom}} rendu: {{ assignment.rendu}}</p>
-            </div>
+        <mat-list-item>
+            <nav>
+                <a routerLink="/assignment/{{assignment.id}}">
+                    <div [ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}">
+                        <h3 matLine>{{assignment.nom}}, {{assignment.id}}</h3>
+                        <p matLine>rendu: {{assignment.rendu}}</p>
+                        <p matListItemTitle>{{assignment.dateRendu | date:'dd/MM/YYYY'}}</p>
+                        <p matListItemLine>{{assignment.nom}} rendu: {{ assignment.rendu}}</p>
+                    </div>
+                </a>
+            </nav>
         </mat-list-item>
         <mat-divider></mat-divider>
         }
@@ -24,10 +29,4 @@
         <h3>Assignment Cliqué :{{assignmentSelectionne.nom}}</h3>
     }
     -->
-
-    <app-assignment-detail 
-        [assignmentTransmis]="assignmentSelectionne"
-        (deleteAssignment)="onDeleteAssignment()">
-    </app-assignment-detail>
 </div>
-}
