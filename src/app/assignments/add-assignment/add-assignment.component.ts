@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Assignment } from '../assignment.model';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { AssignmentsService } from '../../shared/assignments.service';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-assignment',
   standalone: true,
@@ -19,6 +21,7 @@ import { AssignmentsService } from '../../shared/assignments.service';
     MatInputModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    RouterLink
   ],
   templateUrl: './add-assignment.component.html',
   styleUrl: './add-assignment.component.css'
@@ -29,7 +32,9 @@ export class AddAssignmentComponent {
   nomAssignment = '';
   dateDeRendu = undefined;
 
-  constructor(private assignmentsService: AssignmentsService) { }
+  constructor(
+    private assignmentsService: AssignmentsService,
+    private router: Router) { }
 
   onSubmit(event: any) {
     if (this.nomAssignment == '' || this.dateDeRendu === undefined) {
@@ -50,6 +55,7 @@ export class AddAssignmentComponent {
         //on navige pour afficher la liste des assignments
         //en utilisant le router de manière programmatique
         //TODO!!!
+        this.router.navigate(['home']);
       });
   }
 

@@ -14,11 +14,12 @@
         @if (!assignmentTransmis.rendu){
         <mat-checkbox (click)="onAssignmentRendu()">Rendu</mat-checkbox>
         }
-        <nav><a routerLink="['/assignment', 1, 'edit']">
-            <button mat-stroked-button color="primary" (click)="onClickEdit()">
-                Edit
-            </button>
-        </a></nav>
+        <!-- <nav><a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']">-->
+        <nav><a routerLink="edit">
+                <button mat-stroked-button color="primary" (click)="onClickEdit()" [disabled]="!isAdmin()">
+                    Edit
+                </button>
+            </a></nav>
         <button mat-raised-button color="warn" (click)="onDelete()">SUPPRIMER</button>
 
     </mat-card-actions>
