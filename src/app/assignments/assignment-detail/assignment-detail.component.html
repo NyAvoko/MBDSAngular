@@ -16,11 +16,16 @@
         }
         <!-- <nav><a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']">-->
         <nav><a routerLink="edit">
-                <button mat-stroked-button color="primary" (click)="onClickEdit()" [disabled]="!isAdmin()">
+                <button mat-stroked-button color="primary" (click)="onClickEdit()"
+                        [disabled]="!isAdmin()"
+                >
                     Edit
                 </button>
             </a></nav>
-        <button mat-raised-button color="warn" (click)="onDelete()">SUPPRIMER</button>
+        <button mat-raised-button color="warn" (click)="onDelete()"
+            [disabled]="!isAdmin()"
+        >
+        SUPPRIMER</button>
 
     </mat-card-actions>
 </mat-card>

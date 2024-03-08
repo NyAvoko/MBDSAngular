@@ -31,6 +31,8 @@ export class AppComponent {
     private authService: AuthService, 
     private router: Router) {}
   
+    //on utilise le service d'autenfication
+    //pour se connecter ou se déconnecter
     login(){
       if(!this.authService.loggedIn){
        this.authService.logIn();

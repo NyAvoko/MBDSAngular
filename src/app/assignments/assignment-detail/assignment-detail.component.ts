@@ -35,9 +35,7 @@ export class AssignmentDetailComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  isAdmin(){
-    return this.authService.logIn();
-  }
+
   ngOnInit() {
     // Recuperation des query params (ce qui suit le ? dans l'url)
     console.log(this.route.snapshot.queryParams);
@@ -83,4 +81,7 @@ export class AssignmentDetailComponent implements OnInit {
     }
   }
 
+  isAdmin(){
+    return this.authService.loggedIn;
+  }
 }
