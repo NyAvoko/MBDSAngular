@@ -11,7 +11,7 @@
         @for(assignment of assignments; track assignment.nom) {
         <mat-list-item>
             <nav>
-                <a routerLink="/assignment/{{assignment._id}}">
+                <a routerLink="/assignment/{{assignment.id}}">
                     <div [ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}">
                         <h3 matLine>{{assignment.nom}}, id: {{assignment.id}}</h3>
                         <p matLine>rendu: {{assignment.rendu}}</p>

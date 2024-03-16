@@ -23,8 +23,10 @@ export class AssignmentsService {
 
   //revoie un assignment par id, revoie undefined si pas trouvé
   getAssignment(id: number): Observable<Assignment | undefined> {
-    let a:Assignment|undefined = this.assignments.find(a => a.id == id);
-    return of(a);
+    return this.http.get<Assignment>(this.uri+ "/" + id);
+    
+    //let a:Assignment|undefined = this.assignments.find(a => a.id == id);
+    //return of(a);
   }
 
   //Ajoute un assignment et retourne une confirmation

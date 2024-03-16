@@ -24,7 +24,7 @@ import { RouterLink } from '@angular/router';
     MatListModule,
     AddAssignmentComponent,
     MatButtonModule,
-    RouterLink
+    RouterLink,
   ],
 })
 export class AssignmentsComponent implements OnInit {
@@ -35,10 +35,9 @@ export class AssignmentsComponent implements OnInit {
   //ice on injecte le service
   constructor(private assignmentsService: AssignmentsService) {}
 
-  ngOnInit(){
- 
+  ngOnInit() {
     console.log('ngInit assignment , appelée AVANT affichage de composant');
-   this.getassignmentFromService(); 
+    this.getassignmentFromService();
   }
 
   getassignmentFromService() {
